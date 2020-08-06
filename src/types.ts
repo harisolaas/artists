@@ -18,5 +18,5 @@ export type ArtistDetails = {
   stats: { listeners: string; playcount: string };
   tags: { name: string; url: string }[];
 };
-export type Artist = { name: string; id: string };
+export type Artist = { name: string; id: string; image?: any; url?: string };
 export type Artists = Artist[];

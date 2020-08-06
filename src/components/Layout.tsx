@@ -7,7 +7,7 @@ import GlobalStyles from './GlobalStyles';
 const LayoutStyles = styled.div`
   max-width: 700px;
   margin: auto;
-  padding: 24px 0;
+  padding: 24px;
 `;
 
 const Layout: FC = ({ children }) => (
