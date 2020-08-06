@@ -1,7 +1,9 @@
 import React, { FC, ChangeEvent, useState, useMemo, useEffect } from 'react';
 
-import api from '../api';
-import { Artist, Artists } from '../types';
+import api from '../../api';
+import { Artist, Artists } from '../../types';
+
+import { Input,  Item } from './styles';
 
 type Props = { onSelect: (artist: Artist) => void };
 
@@ -51,18 +53,24 @@ const Search: FC<Props> = ({ onSelect }) => {
 
   return (
     <div>
-      <input type="text" value={searchValue} onChange={handleChange} />
-      {artists.length ? (
-        <ul>
-          {artists.map((s, i) => (
-            <li key={s.id + i} onClick={() => handleSelect(s)}>
+      <Input
+        type="text"
+        placeholder="Search"
+        value={searchValue}
+        onChange={handleChange}
+      />
+
+      <ul>
+        {artists.length ? (
+          artists.map((s, i) => (
+            <Item key={s.id + i} onClick={() => handleSelect(s)}>
               {s.name}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>{defaultMessage}</p>
-      )}
+            </Item>
+          ))
+        ) : (
+          <Item disabled>{defaultMessage}</Item>
+        )}
+      </ul>
     </div>
   );
 };

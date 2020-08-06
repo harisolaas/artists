@@ -2,9 +2,10 @@ import React, { FC, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import api from '../api';
-import { Artists, Artist } from '../types';
-import Search from '../components/Search';
+import api from '../../api';
+import { Artists, Artist } from '../../types';
+import Search from '../../components/Search';
+import Root from './styles';
 
 const List: FC = () => {
   const [artist, setArtist] = useState<Artist>();
@@ -20,14 +21,18 @@ const List: FC = () => {
   };
 
   return (
-    <div>
+    <Root>
       <Search onSelect={handleSelect} />
-
-      {loading ? (
-        <div>Loading...</div>
-      ) : similar.length ? (
+      {loading && <div>Loading...</div>}{' '}
+      {!loading && artist && (
         <>
-          <h1>{artist?.name}</h1>
+          <Link to={`/artist/${artist?.id}`}>
+            <h1>{artist?.name}</h1>
+          </Link>
+        </>
+      )}
+      {!loading && !!similar.length && (
+        <>
           <h2>Similar</h2>
           <ul>
             {similar.map((a, i) => (
@@ -37,10 +42,8 @@ const List: FC = () => {
             ))}
           </ul>
         </>
-      ) : (
-        <p>No artists where found</p>
       )}
-    </div>
+    </Root>
   );
 };
 
